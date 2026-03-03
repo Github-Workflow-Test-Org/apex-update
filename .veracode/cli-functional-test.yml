@@ -1,0 +1,34 @@
+name: apex-update-202105
+testcases:
+- name: Package apex-update-202105 repo
+  steps:
+  - type: exec
+    script: |
+      cd ../
+      veracode package --source . --type directory --output .veracode/output/auto --trust
+    assertions:
+      - result.code ShouldEqual 0
+      - result.timeseconds ShouldBeLessThan 300
+      - result.systemout ShouldContainSubstring ".veracode/output/auto/veracode-auto-pack-apex-update-202105-apex.zip"
+      - result.systemout ShouldContainSubstring ".veracode/output/auto/veracode-auto-pack-dxvforce2-js.zip"
+      - result.systemout ShouldContainSubstring "Successfully created 2 artifact(s)."
+
+  - type: check-zip-count
+    zip-file: "veracode-auto-pack-dxvforce2-js.zip"
+    assertions:
+      - result.zip-file.count ShouldEqual 17
+
+  - type: check-zip-contents
+    zip-file: "veracode-auto-pack-dxvforce2-js.zip"
+    assertions:
+      - result.zip-file.difference ShouldBeEmpty
+
+  - type: check-zip-count
+    zip-file: "veracode-auto-pack-apex-update-202105-apex.zip"
+    assertions:
+      - result.zip-file.count ShouldEqual 9
+
+  - type: check-zip-contents
+    zip-file: "veracode-auto-pack-apex-update-202105-apex.zip"
+    assertions:
+      - result.zip-file.difference ShouldBeEmpty

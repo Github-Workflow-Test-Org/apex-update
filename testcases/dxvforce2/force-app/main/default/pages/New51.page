@@ -1,0 +1,62 @@
+<apex:page controller="New51Controller">
+<html>
+<head>
+</head>
+
+<body>
+    <div>
+        <div>Messages:</div>
+        <apex:pageMessages escape="false" />
+    </div>
+
+    <div>
+        xxzgood1: <apex:outputText value="{! xxzgood1}" escape="false" />
+    </div>
+    <div>
+        xxzbad1: <apex:outputText value="{! xxzbad1}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad2: <apex:outputText value="{! xxzbad2}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad3: <apex:outputText value="{! xxzbad3}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad4: <apex:outputText value="{! xxzbad4}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad5: <apex:outputText value="{! xxzbad5}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad6: <apex:outputText value="{! xxzbad6}" escape="false" />     <!-- CWEID 80 -->
+    </div>
+    <div>
+        xxzbad7: <apex:outputText value="{! xxzbad7}" escape="false" />
+    </div>
+    <div>
+        xxzbad8: <apex:outputText value="{! xxzbad8}" escape="false" />
+    </div>
+
+    <div id="oofoutput1">oofoutput1</div>
+    <div id="responseErrors">responseErrors</div>
+
+    <script type="text/javascript">
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.New51Controller.getSomething}',
+            'hello', 
+            function(result, event){
+                if (event.status) {
+                    document.getElementById('oofoutput1').innerHTML = result;       // CWEID 80
+                } else if (event.type === 'exception') {
+                    document.getElementById('oofoutput1').innerHTML = 'exception ' + event.message + ' where: ' + event.where;       // CWEID 80
+                } else {
+                    document.getElementById("responseErrors").innerHTML = event.message;    // CWEID 80
+                }
+            }, 
+            {escape: true}
+        );
+    </script>
+
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:attribute name="augoodval" type="String"/>
+    <aura:attribute name="aubadval1" type="String"/>
+    <aura:attribute name="aubadval2" type="String"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}" />
+
+    <lightning:inputRichText value="{!v.myVal}" placeholder="Type something interesting"/>
+
+
+</aura:component>	
